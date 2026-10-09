@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#171124">
+<title>A little something for Drishika ♡</title>
+<style>
+:root{--night:#171124;--plum:#30203c;--pink:#ff9ecb;--pale:#fff0f7;--ink:#25162c;--muted:#d9c7e0}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:ui-rounded,"Trebuchet MS",system-ui,sans-serif;background:radial-gradient(circle at 20% 10%,#51304f 0,transparent 28%),radial-gradient(circle at 85% 75%,#35254c 0,transparent 32%),var(--night);color:var(--pale);overflow-x:hidden}
+button{font:inherit;cursor:pointer}
+.stars,.hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.star{position:absolute;color:#ffd9ed;opacity:.65;animation:twinkle 2.5s ease-in-out infinite alternate}
+@keyframes twinkle{to{opacity:.18;transform:scale(.7)}}
+.float-heart{position:absolute;bottom:-40px;color:#ff9ecb;animation:rise 9s linear infinite;opacity:.5}
+@keyframes rise{to{transform:translateY(-110vh) rotate(30deg);opacity:0}}
+main{position:relative;z-index:1;min-height:100vh;display:grid;place-items:center;padding:24px 14px}
+.card{width:min(100%,520px);padding:clamp(24px,6vw,42px);border:1px solid #ffffff24;border-radius:28px;background:linear-gradient(145deg,#281a36ed,#171124f2);box-shadow:0 25px 80px #09061180;text-align:center;position:relative;overflow:hidden}
+.card:before{content:"";position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,#ff9ecb,#bfa5ff,#ff9ecb)}
+.eyebrow{letter-spacing:.12em;text-transform:uppercase;color:#e9b8d9;font-size:.75rem}
+h1{font-size:clamp(2rem,8vw,3rem);line-height:1.12;margin:16px 0;color:#fff2fb}
+p{line-height:1.75;color:#e8d9ed;font-size:1.02rem}
+.emoji{font-size:3.2rem;display:block;margin:8px auto 16px;filter:drop-shadow(0 0 18px #ff9ecb66)}
+.note{background:#ffffff0c;border:1px solid #ffffff19;border-radius:18px;padding:16px;margin:20px 0;text-align:left}
+.note strong{color:#ffc5e1}
+.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px;min-height:52px;align-items:center}
+.btn{border:0;border-radius:999px;padding:13px 25px;min-width:128px;font-weight:750;transition:transform .18s,box-shadow .18s}
+.btn:active{transform:scale(.96)}
+.yes{color:#34172e;background:linear-gradient(135deg,#ffc2df,#ff8dc5);box-shadow:0 8px 24px #ff8dc544}
+.secondary{color:#fff0f8;background:#ffffff12;border:1px solid #ffffff35}
+.small{font-size:.82rem;color:#bdaac9;margin-top:18px}
+.hidden{display:none!important}
+.progress{height:4px;background:#ffffff15;border-radius:99px;overflow:hidden;margin-bottom:24px}
+.progress span{display:block;height:100%;width:20%;background:#ff9ecb;transition:width .3s}
+.letter{text-align:left;background:#fff0f7;color:#2d1931;padding:23px;border-radius:18px;line-height:1.8;box-shadow:0 10px 30px #0002}
+.letter p{color:#2d1931;margin:0 0 12px}
+.letter .sign{text-align:right;font-weight:bold;color:#873c70}
+#toast{min-height:24px;color:#ffc1e0;font-size:.9rem;margin-top:14px}
+footer{font-size:.75rem;color:#9c89ab;margin-top:20px}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="stars" id="stars"></div><div class="hearts" id="hearts"></div>
+<main>
+<section class="card" aria-live="polite">
+<div class="progress"><span id="progress"></span></div>
+<div id="screen1">
+<div class="eyebrow">a tiny corner of the universe ♡</div>
+<span class="emoji">🌙</span>
+<h1>Hey, Drishika...</h1>
+<p>I made a little something for you. No big speech, no pressure — just a small reminder that someone is rooting for you. 💗</p>
+<div class="note"><strong>Today's gentle reminder:</strong><br> You don't have to be cheerful every second. Rest, take it slow, drink some water, and be kind to yourself. You're allowed to have a not-so-good day.</div>
+<div class="actions"><button class="btn yes" onclick="go(2)">Open your little surprise ♡</button></div>
+<div class="small">made with a little too much thought ✨</div>
+</div>
+<div id="screen2" class="hidden">
+<div class="eyebrow">a little comfort note</div><span class="emoji">🐱</span>
+<h1>First things first...</h1>
+<p>If today feels heavy, you don't need to explain every little thing or pretend you're okay for anyone.</p>
+<div class="note"><strong>Official instructions from the tiny comfort committee:</strong><br>♡ Get comfy if you can.<br>♡ Sip some water.<br>♡ Eat something when you're able.<br>♡ Rest without feeling guilty.<br>♡ Remember you're more than one difficult day.</div>
+<p>And if all you do today is get through the day, that counts too. 🫶</p>
+<div class="actions"><button class="btn yes" onclick="go(3)">Okay, one more ♡</button></div>
+</div>
+<div id="screen3" class="hidden">
+<div class="eyebrow">now for the actual question...</div><span class="emoji">💌</span>
+<h1>Drishika, can I ask you something?</h1>
+<p>I don't want to rush you or make you feel like you have to say anything just to make me happy.</p>
+<p><strong style="color:#ffc4e1">Would you give me a chance to become someone special to you?</strong></p>
+<div class="actions" id="questionActions">
+<button class="btn yes" onclick="go(4)">YES 💗</button>
+<button class="btn secondary" id="noBtn" onclick="nope()">NO 🙈</button>
+</div>
+<div id="toast">Psst... the NO button is a little shy 😭</div>
+<div class="small">Your feelings matter — always. ♡</div>
+</div>
+<div id="screen4" class="hidden">
+<div class="eyebrow">you made it to the next page ♡</div><span class="emoji" id="bigHeart">💖</span>
+<h1>Okay... here's my heart.</h1>
+<div class="letter">
+<p>Drishika,</p>
+<p>I like the little things about you — your talks, your random moods, your silly moments, and the parts of you that you don't show everyone.</p>
+<p>I don't expect you to trust me overnight, and I don't need you to have everything figured out. I'd rather earn your trust slowly, by being honest and consistent.</p>
+<p>You don't have to be okay all the time with me. On your happy days, I'll cheer for you; on the rough ones, I can listen — if that's what you want.</p>
+<p>And please take care of yourself today, okay? You deserve softness, patience, and kindness. Not just today. Always. ♡</p>
+<p class="sign">— Anant 💗</p>
+</div>
+<div class="actions"><button class="btn yes" onclick="go(5)">One last tiny thing ✨</button></div>
+</div>
+<div id="screen5" class="hidden">
+<div class="eyebrow">no pressure, just a little honesty</div><span class="emoji">🌌</span>
+<h1>So, Drishika...</h1>
+<p>Whatever your answer is, I'm glad I got to tell you how I feel.</p>
+<p><strong style="color:#ffc4e1;font-size:1.15rem">Will you give this a chance? 💗</strong></p>
+<div class="actions" id="finalActions">
+<button class="btn yes" onclick="finalYes()">YES ♡</button>
+<button class="btn secondary" id="finalNo" onclick="finalNope()">NO 🙈</button>
+</div>
+<div id="finalMsg" class="small">The NO button has a flair for drama 😂</div>
+<footer>made for Drishika, with care · take it at your own pace</footer>
+</div>
+</section>
+</main>
+<script>
+const starBox=document.getElementById('stars'), heartBox=document.getElementById('hearts');
+for(let i=0;i<42;i++){let s=document.createElement('span');s.className='star';s.textContent=Math.random()>.5?'✦':'·';s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.fontSize=(8+Math.random()*13)+'px';s.style.animationDelay=(Math.random()*3)+'s';starBox.appendChild(s)}
+for(let i=0;i<12;i++){let h=document.createElement('span');h.className='float-heart';h.textContent=['♡','♥','✧'][i%3];h.style.left=Math.random()*100+'%';h.style.animationDelay=(Math.random()*9)+'s';h.style.animationDuration=(7+Math.random()*7)+'s';h.style.fontSize=(12+Math.random()*15)+'px';heartBox.appendChild(h)}
+let current=1;
+function go(n){document.getElementById('screen'+current).classList.add('hidden');current=n;document.getElementById('screen'+n).classList.remove('hidden');document.getElementById('progress').style.width=(n*20)+'%';window.scrollTo({top:0,behavior:'smooth'});if(n===4)burst()}
+function burst(){for(let i=0;i<18;i++){let h=document.createElement('span');h.textContent=['💗','✨','♡'][i%3];h.style.position='fixed';h.style.left=(10+Math.random()*80)+'vw';h.style.top=(15+Math.random()*70)+'vh';h.style.zIndex=5;h.style.pointerEvents='none';h.style.fontSize=(16+Math.random()*16)+'px';h.style.transition='all 1.5s ease';document.body.appendChild(h);setTimeout(()=>{h.style.transform='translateY(-70px) rotate(25deg)';h.style.opacity='0'},30);setTimeout(()=>h.remove(),1600)}}
+function dodge(btn){const parent=btn.parentElement;const maxX=Math.max(0,parent.clientWidth-btn.offsetWidth);const maxY=45;btn.style.position='relative';btn.style.left=(Math.random()*Math.min(maxX,110)-Math.min(maxX,55))+'px';btn.style.top=(Math.random()*maxY- maxY/2)+'px';}
+function nope(){const b=document.getElementById('noBtn');dodge(b);document.getElementById('toast').textContent=['Areee, it got shy 😭','Catch it if you can 😂','NO is doing cardio now 🏃‍♀️','Psst... you can still choose whatever feels right ♡'][Math.floor(Math.random()*4)]}
+document.getElementById('noBtn').addEventListener('pointerenter',function(e){if(e.pointerType==='mouse')dodge(this)});
+function finalNope(){const b=document.getElementById('finalNo');dodge(b);document.getElementById('finalMsg').textContent='Drama queen button 😭 (but seriously, your answer is yours ♡)'}
+document.getElementById('finalNo').addEventListener('pointerenter',function(e){if(e.pointerType==='mouse')dodge(this)});
+function finalYes(){document.getElementById('screen5').innerHTML='<span class="emoji">💖</span><div class="eyebrow">a little moment to remember</div><h1>Thank you, Drishika ♡</h1><p>Whatever this becomes, I want it to be something that feels safe, honest, and happy for both of us.</p><p>Take care of yourself, smile when you can, and never forget that you deserve kindness — especially from yourself. 🌙</p><div class="letter"><p>One day at a time. No rush, no pressure. Just two people being real with each other. 💗</p><p class="sign">— Anant</p></div><div class="actions"><button class="btn secondary" onclick="location.reload()">Read it again ↺</button></div>'}
+</script>
+</body>
+</html>
